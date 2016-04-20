@@ -39,7 +39,7 @@ var prompt = require ('prompt');
 				var itemId = rows[i].ItemID;
 				var product = rows[i].ProductName;
 				var price = rows[i].Price;
-				var startQuant = row[i].StockQuantity;
+				var startQuant = rows[i].StockQuantity;
 
 			};
 		}
@@ -48,14 +48,22 @@ var prompt = require ('prompt');
 
 			prompt.get(['productid', 'quantity'], function (err, result){
 
-				var productId = result.productid;
+				var productid = result.productid;
 					console.log(productid);
 				var quantity = result.quantity;
 					console.log(quantity);
+
+
+					//CHECK TO SEE IF THERE IS ENOUGH STOCK
+					con.query("SELECT * FROM Products WHERE ItemID =" + productid, function (err, rows){
+						//console.log(rows);
+						console.log(rows.StockQuantity)
+						if (quantity > rows.StockQuantity){
+							console.log("Insufficient Stock");
+						} else {
+							console.log("Your total is: $" + (quantity * rows.Price))
+						}
+				})	
 			})
 
-			//CHECK TO SEE IF THERE IS ENOUGH STOCK
-			con.query("SELECT * FROM Products WHERE ItemID =" + itemID, function (err, rows){
-				console.log(rows);
-			})
 	});
