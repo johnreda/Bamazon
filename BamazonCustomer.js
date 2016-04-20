@@ -41,8 +41,8 @@ var prompt = require ('prompt');
 				var price = rows[i].Price;
 				var startQuant = rows[i].StockQuantity;
 
-			};
-		}
+			}; //<< CLOSE DISPLAY MENU FOR LOOP
+		} //<< CLOSE GET/DISPLAY MENU
 
 		prompt.start() 
 
@@ -52,11 +52,13 @@ var prompt = require ('prompt');
 				var productid = result.productid;
 					//console.log(productid);
 				var quantity = result.quantity;
-					//console.log(quantity);
-
+					//console.log(quantity); 
 
 					//CHECK TO SEE IF THERE IS ENOUGH STOCK
 					con.query("SELECT * FROM Products WHERE ItemID =" + productid, function (err, rows){
+						
+						var currentStock = rows[0].StockQuantity;
+
 						//console.log(rows);
 						console.log(rows[0].StockQuantity)
 						if (quantity > rows[0].StockQuantity){
@@ -65,7 +67,14 @@ var prompt = require ('prompt');
 							console.log("You have ordered " + quantity + " " + '"' + rows[0].ProductName + 's"');
 							console.log("Your total is: $" + (quantity * rows[0].Price));
 						}
-				})	
-			})
+					
+					//UPDATE TABLE AFTER AN ORDER IS PLACED
+					con.query("UPDATE Products SET StockQuantity = " + (currentStock - quantity) + "WHERE StockQuantity = " + rows[0].StockQuantity, function (err, rows){
+						console.log(rows);
+					})
+						});//<< CLOSE ORDER FUNCTION
 
-	});
+			})//<< CLOSE PROMPT FUNCTION
+
+	}) //<< CLOSE ORIGINAL QUERY
+
