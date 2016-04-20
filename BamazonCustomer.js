@@ -48,20 +48,22 @@ var prompt = require ('prompt');
 
 			prompt.get(['productid', 'quantity'], function (err, result){
 
+				//TAKE THE USER'S ORDER
 				var productid = result.productid;
-					console.log(productid);
+					//console.log(productid);
 				var quantity = result.quantity;
-					console.log(quantity);
+					//console.log(quantity);
 
 
 					//CHECK TO SEE IF THERE IS ENOUGH STOCK
 					con.query("SELECT * FROM Products WHERE ItemID =" + productid, function (err, rows){
 						//console.log(rows);
-						console.log(rows.StockQuantity)
-						if (quantity > rows.StockQuantity){
+						console.log(rows[0].StockQuantity)
+						if (quantity > rows[0].StockQuantity){
 							console.log("Insufficient Stock");
 						} else {
-							console.log("Your total is: $" + (quantity * rows.Price))
+							console.log("You have ordered " + quantity + " " + '"' + rows[0].ProductName + 's"');
+							console.log("Your total is: $" + (quantity * rows[0].Price));
 						}
 				})	
 			})
