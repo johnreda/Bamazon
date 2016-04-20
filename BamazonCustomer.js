@@ -58,19 +58,22 @@ var prompt = require ('prompt');
 					con.query("SELECT * FROM Products WHERE ItemID =" + productid, function (err, rows){
 						
 						var currentStock = rows[0].StockQuantity;
+							console.log("Current Stock: " + currentStock);
+							console.log("Quantity: " + quantity);
 
 						//console.log(rows);
-						console.log(rows[0].StockQuantity)
+					
 						if (quantity > rows[0].StockQuantity){
 							console.log("Insufficient Stock");
 						} else {
 							console.log("You have ordered " + quantity + " " + '"' + rows[0].ProductName + 's"');
 							console.log("Your total is: $" + (quantity * rows[0].Price));
 						}
+							//console.log("NEW STOCK:" + currentStock - quantity);
 					
 					//UPDATE TABLE AFTER AN ORDER IS PLACED
 					con.query("UPDATE Products SET StockQuantity = " + (currentStock - quantity) + "WHERE StockQuantity = " + rows[0].StockQuantity, function (err, rows){
-						console.log(rows);
+						console.log("UPDATED TABLE: " + rows);
 					})
 						});//<< CLOSE ORDER FUNCTION
 
