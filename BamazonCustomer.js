@@ -74,8 +74,9 @@ var prompt = require ('prompt');
 							//console.log("NEW STOCK:" + currentStock - quantity);
 					
 					//UPDATE TABLE AFTER AN ORDER IS PLACED
-					con.query("UPDATE Products SET StockQuantity = " + newStock + "WHERE StockQuantity = " + rows[0].StockQuantity, function (err, rows){
-						console.log("UPDATED TABLE");
+					con.query("UPDATE Products SET StockQuantity = " + newStock + "WHERE StockQuantity = " + currentStock, function (err, rows){
+						console.log("UPDATE Products SET StockQuantity = " + " " + newStock + " WHERE StockQuantity = " + " " + currentStock)
+						console.log("UPDATED TABLE" + newStock);
 					})
 
 						});//<< CLOSE ORDER FUNCTION
