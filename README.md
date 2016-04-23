@@ -12,4 +12,4 @@
 ### In the event the user wishes to order more than the amount currently in stock, they are presented a message telling them there is insufficient stock.
 
 ![BamazonCustomer](/desktop/BamazonCustomer.gif)
-Format: ![Bamazon Customer Demo]
+
