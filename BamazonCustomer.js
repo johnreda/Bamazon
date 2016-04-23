@@ -20,7 +20,9 @@ var prompt = require ('prompt');
 		console.log ('connected');
 	});
 
-		//CREATE THE QUERY	
+
+
+		//CREATE THE QUERY			
 		con.query("SELECT * FROM Products", function (err, rows){
 			
 
@@ -74,9 +76,10 @@ var prompt = require ('prompt');
 							//console.log("NEW STOCK:" + currentStock - quantity);
 					
 					//UPDATE TABLE AFTER AN ORDER IS PLACED
-					con.query("UPDATE Products SET StockQuantity = " + newStock + "WHERE StockQuantity = " + currentStock, function (err, rows){
-						console.log("UPDATE Products SET StockQuantity = " + " " + newStock + " WHERE StockQuantity = " + " " + currentStock)
-						console.log("UPDATED TABLE" + newStock);
+					con.query("UPDATE Products SET StockQuantity = " + newStock + 
+						" WHERE StockQuantity = " + currentStock + " AND ItemID = " + productid, 
+					function (err, rows){
+						//console.log(rows);
 					})
 
 						});//<< CLOSE ORDER FUNCTION
