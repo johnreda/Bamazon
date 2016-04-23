@@ -11,5 +11,5 @@
 
 ### In the event the user wishes to order more than the amount currently in stock, they are presented a message telling them there is insufficient stock.
 
-![BamazonCustomer](/desktop/BamazonCustomer.gif)
+![BamazonCustomer](https://cloud.githubusercontent.com/assets/15909312/14761950/5569017c-093c-11e6-84c3-857c249f1a5c.gif)
 
